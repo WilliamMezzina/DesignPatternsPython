@@ -1,3 +1,7 @@
+"""
+O motivo dessa separação toda é pra não ficar enfiando IF
+"""
+
 from abc import ABC, abstractmethod
 
 class VeiculoLuxo(ABC):
@@ -99,19 +103,8 @@ class ZonaSulVeiculoFactory(VeiculoFactory):
         return MotoPopularZS()
 
 class Cliente:
-    def busca_clientes_ZN(self):
-        for factory in [ZonaNorteVeiculoFactory()]:
-            carro_popular = factory.get_carro_popular()
-            carro_popular.buscar_cliente()
-            carro_luxo = factory.get_carro_luxo()
-            carro_luxo.buscar_cliente()
-            moto_popular = factory.get_moto_popular()
-            moto_popular.buscar_cliente()
-            moto_luxo = factory.get_moto_luxo()
-            moto_luxo.buscar_cliente()
-
-    def busca_clientes_ZS(self):
-        for factory in [ZonaSulVeiculoFactory()]:
+    def busca_clientes(self):
+        for factory in [ZonaNorteVeiculoFactory(), ZonaSulVeiculoFactory()]:
             carro_popular = factory.get_carro_popular()
             carro_popular.buscar_cliente()
             carro_luxo = factory.get_carro_luxo()
@@ -124,6 +117,4 @@ class Cliente:
 
 if __name__ == '__main__':
     cliente = Cliente()
-    cliente.busca_clientes_ZN()
-    print()
-    cliente.busca_clientes_ZS()
+    cliente.busca_clientes()
